@@ -21,9 +21,9 @@ def get_login_details():
             no_of_items = 0
         else:
             logged_in = True
-            cur.execute("SELECT user_id, first_name FROM users WHERE email = '" + session['email'] + "'")
+            cur.execute("SELECT userId, firstName FROM users WHERE email = '" + session['email'] + "'")
             user_id, first_name = cur.fetchone()
-            cur.execute("SELECT count(productId) FROM kart WHERE user_id = " + str(user_id))
+            cur.execute("SELECT count(productId) FROM kart WHERE userId = " + str(user_id))
             no_of_items = cur.fetchone()[0]
     conn.close()
     return (logged_in, first_name, no_of_items)
@@ -176,10 +176,10 @@ def update_profile():
 @app.route("/loginForm")
 def login_form():
     # Uncomment to enable logging in and registration
-    #if 'email' in session:
+    if 'email' in session:
         return redirect(url_for('root'))
-    #else:
-    #    return render_template('login.html', error='')
+    else:
+        return render_template('login.html', error='')
 
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
