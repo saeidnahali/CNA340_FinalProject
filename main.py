@@ -45,7 +45,7 @@ def root():
         category_data = cur.fetchall()
     item_data = parse(item_data)
     return render_template('home.html', itemData=item_data, loggedIn=logged_in, firstName=first_name, noOfItems=no_of_items, categoryData=category_data)
-
+ 
 @app.route("/add")
 def admin():
     with sqlite3.connect('database.db') as conn:
